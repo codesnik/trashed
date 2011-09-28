@@ -29,7 +29,7 @@ module Trashed
         lambda { ::GC.collections})
       Collections = Change.new('GC/Collections', CollectionsTotal)
 
-      TimeTotal = Metric.new('GC/Time/Total', :sec,
+      TimeTotal = Metric.new('GC/Time/Total', :ms,
         lambda { ::GC.respond_to?(:time) },
         lambda { ::GC.time / 1000.0 })
       Time = Change.new('GC/Time', TimeTotal)
