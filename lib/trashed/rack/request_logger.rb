@@ -23,7 +23,9 @@ module Trashed
           response = yield
 
           measurements = metrics.map { |m| @format % [m.label, m.measure, m.units] }
-          @logger.info "[Trashed] #{measurements * '; '}"
+          totals, current = measurements.partition {|m| m =~ /Total/ }
+          @logger.info "[Trashed] #{current * '; '}" unless current.empty?
+          @logger.info "[Trashed Totals] #{totals * '; '}" unless totals.empty?
 
           response
         end
